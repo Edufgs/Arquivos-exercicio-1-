@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+int i,f, a;
+FILE *file1;
+FILE *file2;
+float c;
+char b;
+main()
+{
+    //abrindo arquivos
+    file1=fopen("Arquivo 1.txt", "r+");
+    if(!file1)
+    {
+        printf("ERRO NA ABERTURA (ARQUIVO 1)!!!");
+        exit(1);
+    }
+
+    file2=fopen("Arquivo 2.txt", "r+");
+    if(!file2)
+    {
+        printf("ERRO NA ABERTURA (ARQUIVO2) !!!");
+        exit(1);
+    }
+    comecar();
+}
+ler()
+{
+    char ler1[55]={0};
+    char ler2 [55]={0};
+    int ler3[55]={0};
+    while(fgets(ler1, 55, file1)!=NULL)
+    {
+        while(fgets(ler2, 55, file2)!=NULL)
+        {
+            f=0;
+            for(i=0; i<=44; i++)
+            {
+                if(ler1[i]==ler2[i])
+                {
+                    f++;
+                    if(f==44)
+                    {
+                        fgets(ler1, 55, file1);
+
+
+                        //posicao 46 e 47 ontes esta o tempo
+
+                        for(i=0; i<=55; i++)
+                        {
+                            fprintf(file1,"%d", ler1[i]);
+                            fprintf(file2,"%d", ler2[i]);
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+    fechar();
+}
+
+comecar()//funcao pra comecar
+{
+    printf("Voce quer comecar?[1-Sim]ou [2-Nao]:");
+    scanf("%d", &i);
+    if (i==1)
+    {
+        ler();
+    }
+    else
+    if(i==2)
+    {
+        fechar();
+    }
+}
+
+fechar()
+{
+    fclose(file1);
+    fclose(file2);
+}
+
+
+
+
+
