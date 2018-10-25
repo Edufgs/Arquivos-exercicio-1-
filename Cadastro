@@ -1,0 +1,165 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+FILE *aq1, *aq2, *dados;
+int i, n, f;
+
+main()
+{
+    //Abrindo e verificando se foi aberto corretamente
+   dados=fopen("dados.txt", "w");
+   if(!dados)
+   {
+       printf("O arquivo nao foi aberto corretamente!!!");
+       exit(1);
+   }
+   aq1=fopen("1 arquivo.txt", "w");
+   if(!aq1)
+   {
+        printf("O arquivo nao foi aberto corretamente!!!");
+        exit(1);
+   }
+   aq2=fopen("2 arquivo.txt", "w");
+   if(!aq2)
+   {
+        printf("O arquivo nao foi aberto corretamente!!!");
+        exit(1);
+   }
+   dado();
+
+}
+
+dado()
+{
+   char nome [33] = {0};
+   fflush(stdin);//limpar a funcao gets e usar ele de novo
+    //escrever o nome da pessoa
+    printf("\nEscreva o nome:");
+    printf("\nNO MAXIMO 30 CARACTERE!!:");
+    gets(&nome);
+
+
+    //colocar o sexo
+    printf("\n\nQual o sexo:");
+    printf("\n[1-Masculino]; [2-Feminino]:");
+    scanf("%d", &n);
+
+    if(n==1)
+    {
+        nome[31] = 'M';
+
+    }
+    else
+    if(n==2)
+    {
+        nome[31] = 'F';
+    }
+
+    //Cor do olho
+    printf("\n\nQual a cor dos olhos:");
+    printf("\n[1-Amarelo], [2-Branco], [3-Castanho], [4-Dourado]:");
+    scanf("%d", &n);
+
+    if(n==1)
+    {
+        nome[33]='A';
+
+    }
+    else
+    if(n==2)
+    {
+        nome[33]='B';
+
+    }
+    else
+    if(n==3)
+    {
+        nome[33]='C';
+
+    }
+    else
+    if(n==4)
+    {
+        nome[33]='D';
+
+    }
+    //Imprimir no arquivo
+    for (i=0; i<=33; i++)
+    {
+        fprintf(dados, "%c", nome[i]);
+    }
+    //Altura
+    printf("\n\nQual a altura em (Metros):");
+    scanf("%d", &f);
+
+    fprintf(dados, " %d", f);
+    //peso
+    printf("\n\nQual o peso:");
+    scanf("%d", &f);
+
+    fprintf(dados, " %d", f);
+
+    denovo();//Funçao para perguntar se quer novamente
+}
+
+denovo()//funçao novamente
+{
+    printf("Voce quer adicionar mais pessoa?");
+    printf("[1-Sim], [2-Nao]");
+    scanf("%d", &n);
+
+    if(n==1)
+    {
+        fprintf(dados, "\n");//pula para linha de baixo
+        dado();
+    }
+    else
+    if(n==2)
+    {
+        ler();
+    }
+}
+
+fecha() //fechamento
+{
+    fclose(dados);
+    fclose(aq1);
+    fclose(aq2);
+}
+
+ler()//ler o arquivo dados e separar
+{
+    fclose(dados);
+    dados=fopen("dados.txt", "r");
+   if(!dados)//Ver se o arquivo foi aberto
+   {
+       printf("O arquivo nao foi aberto corretamente!!!");
+       exit(1);
+   }
+
+    char vler[100] = {0};
+    while(fgets(vler, 45, dados)!= NULL)//le a linha inteira
+    {
+        //condiçao M ou F
+        if(vler[31]=='M')
+        {
+           for(i=0; i<=40; i++)
+        	{
+        		 fprintf(aq1,"%c",vler[i]);
+			}
+			fprintf(aq1,"\n");
+
+        }
+        else
+        if(vler[31]=='F')
+        {
+        	for(i=0; i<=40; i++)
+        	{
+        		 fprintf(aq2,"%c",vler[i]);
+			}
+			fprintf(aq2,"\n");
+        }
+
+    }
+    fecha();
+}
