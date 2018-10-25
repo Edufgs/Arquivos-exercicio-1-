@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+
+int ca1=0, ca2=0, ca3=0, ca4=0, ca5=0, ca6, n, entrar, n1, i;
+FILE *elei;
+ele()
+{
+    printf ("\n\nQual o candidato que vc quer votar?");
+    printf ("\n[1-Bolsonaro]; [2-Marina]; [3-Ciro]; [4-Eduardo]; [5-Jaguatirica], [6-branco]:");
+    scanf("%d", &n);
+    if (n==1)
+    {
+        ca1++;
+    }
+    else
+    if(n==2)
+    {
+        ca2++;
+    }
+    else
+    if(n==3)
+    {
+        ca3++;
+    }
+    else
+    if(n==4)
+    {
+        ca4++;
+    }
+    else
+    if(n==5)
+    {
+        ca5++;
+    }
+    else
+    if(n==6)
+    {
+        ca6++;
+    }
+    else
+    {
+        ca6++;
+    }
+}
+main()
+{
+    elei=fopen ("votos.txt", "w");
+    if (!elei)
+    {
+        printf("Erro na abertura");
+        exit(1);
+    }
+    printf("\n--------------------------------");
+    printf("\nEleicao 2018");
+    printf("\n--------------------------------");
+
+    for(i=1; i<=10; i++)
+    {
+    printf("\n%d Eleitor", i);
+    ele();
+    }
+    /*votos em branco*/
+    fprintf(elei,"\n\nTeve %d votos em branco", ca6);
+    /*Candidato mais votado*/
+    if (ca1>ca2 && ca1>ca3 && ca1>ca4 && ca1>ca5)
+    {
+        fprintf(elei,"\n\nO mais votado é foi o Bolsonaro com %d votos", ca1);
+    }
+    else
+    if (ca2>ca1 && ca2>ca3 && ca2>ca4 && ca2>ca5)
+    {
+        fprintf(elei,"\n\nO mais votado é foi o Marina com %d votos", ca2);
+    }
+     else
+    if (ca3>ca1 && ca3>ca2 && ca3>ca4 && ca3>ca5)
+    {
+        fprintf(elei,"\n\nO mais votado é foi o Ciro com %d votos", ca3);
+    }
+     else
+    if (ca4>ca1 && ca4>ca3 && ca4>ca2 && ca4>ca5)
+    {
+        fprintf(elei,"\n\nO mais votado é foi o Eduardo com %d votos", ca4);
+    }
+     else
+    if (ca5>ca1 && ca5>ca3 && ca5>ca4 && ca5>ca2)
+    {
+        fprintf(elei,"\n\nO mais votado é foi o Jaguatirica com %d votos", ca5);
+    }
+    /*Menor voto*/
+    if (ca1<ca2 && ca1<ca3 && ca1<ca4 && ca1<ca5)
+    {
+        fprintf(elei,"\n\nO menos votado é foi o Bolsonaro com %d votos", ca1);
+    }
+    else
+    if (ca2<ca1 && ca2<ca3 && ca2<ca4 && ca2<ca5)
+    {
+        fprintf(elei,"\n\nO menos votado é foi o Marina com %d votos", ca2);
+    }
+    else
+    if (ca3<ca1 && ca3<ca2 && ca3<ca4 && ca3<ca5)
+    {
+        fprintf(elei,"\n\nO menos votado é foi o Ciro com %d votos", ca3);
+    }
+    else
+    if (ca4<ca1 && ca4<ca3 && ca4<ca2 && ca4<ca5)
+    {
+        fprintf(elei,"\n\nO menos votado é foi o Eduardo com %d votos", ca4);
+    }
+    else
+    if (ca5<ca1 && ca5<ca3 && ca5<ca4 && ca5<ca2)
+    {
+        fprintf(elei,"\n\nO menos votado é foi o Jaguatirica com %d votos", ca5);
+    }
+
+    fprintf(elei, "\n\nO candidato Bolsobaro teve %d votos", ca1);
+    fprintf(elei, "\n\nO candidato Marina teve %d votos", ca2);
+    fprintf(elei, "\n\nO candidato Ciro teve %d votos", ca3);
+    fprintf(elei, "\n\nO candidato Eduardo teve %d votos", ca4);
+    fprintf(elei, "\n\nO candidato Jaguatirica teve %d votos", ca5);
+
+    fclose(elei);
+}
